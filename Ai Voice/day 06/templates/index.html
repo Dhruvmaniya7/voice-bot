@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Agent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+        }
+        .glass-card {
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1), 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        .glowing-btn {
+            background-image: linear-gradient(45deg, #6366f1, #a855f7);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .glowing-btn:hover {
+            box-shadow: 0 0 15px #a855f7;
+            transform: translateY(-2px);
+        }
+        #text-input, #voice-select {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+        }
+        #text-input::placeholder {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="glass-card w-full max-w-5xl"> 
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold tracking-tight mb-2">Voice Agent</h1>
+            <p class="text-lg text-gray-400">Transform your text into natural speech with AI</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+
+            <div class="w-full md:w-1/2">
+                <div id="tts-section">
+                    <h2 class="text-2xl font-bold tracking-tight mb-6">Text-to-Speech</h2>
+                    <form id="tts-form">
+                        <div class="mb-6">
+                            <label for="text-input" class="block text-gray-300 font-medium mb-2">ENTER YOUR TEXT</label>
+                            <textarea id="text-input" class="w-full p-4 h-32 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Hello, I am Shadow"></textarea>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <label for="voice-select" class="block text-gray-300 font-medium mb-2">CHOOSE VOICE</label>
+                            <select id="voice-select" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <option value="en-US-katie">Female (Katie)</option>
+                                <option value="en-US-katie-alt-2">Female (Elise)</option>
+                                <option value="en-US-charles">Male (Charles)</option>
+                                <option value="en-US-terrell">Male (Terrell)</option>
+                            </select>
+                        </div>
+
+                        <div class="flex justify-center mb-8">
+                            <button type="submit" id="generate-button" class="glowing-btn w-full py-4 px-6 font-bold rounded-full text-lg">
+                                Generate & Play
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="status-area">
+                        <h3 class="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-2 text-purple-400"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                            Generated Audio
+                        </h3>
+            
+                        <div id="loading-indicator" class="hidden text-center text-purple-400 font-medium animate-pulse mb-4">
+                            <p>Generating audio, please wait...</p>
+                        </div>
+                        
+                        <div id="message-box" class="hidden p-4 rounded-lg text-center font-semibold mb-4"></div>
+            
+                        <div id="audio-player-container" class="hidden">
+                            <audio id="audio-player" class="w-full" controls></audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 mt-12 md:mt-0">
+                <div id="echo-bot-section">
+                    <h2 class="text-4xl font-bold tracking-tight mb-6 text-center">Echo Bot</h2>
+                    <p class="text-gray-400 mb-6">Record and listen to your transcription!</p>
+                    
+                    <div class="flex justify-center space-x-4 mb-6">
+                        <button id="start-recording-btn" class="glowing-btn py-3 px-6 font-bold rounded-full text-lg">
+                            Start Recording
+                        </button>
+                        <button id="stop-recording-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full text-lg transition-colors" disabled>
+                            Stop Recording
+                        </button>
+                    </div>
+                    
+                    <div id="recording-status" class="text-center text-purple-400 font-medium animate-pulse hidden mb-4">
+                        <p>Recording in progress...</p>
+                    </div>
+
+                    <div id="uploading-status" class="hidden text-center text-green-400 font-medium animate-pulse mb-4">
+                        <p>Transcribing audio, please wait...</p>
+                    </div>
+                    
+                    <div id="echo-audio-container" class="hidden flex items-center justify-between gap-4 p-4 rounded-lg border border-white/[0.1] bg-slate-800/50 mb-4">
+                        <audio id="echo-audio-player" class="flex-grow" controls></audio>
+                        <button id="delete-echo-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors duration-300">Delete</button>
+                    </div>
+
+                    <div id="transcription-container" class="hidden mt-6">
+                        <h3 class="text-lg font-bold text-gray-300 mb-2 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text text-purple-400"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9h5"/><path d="M10 13h4"/><path d="M10 17h4"/></svg>
+                            Transcription Result
+                        </h3>
+                        <div id="transcription-result" class="p-4 rounded-lg border border-white/[0.1] bg-slate-800/50 text-gray-300 whitespace-pre-wrap"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="text-center text-sm text-gray-500 mt-8">
+            </div>
+    </div>
+
+    <script src="/static/index.js"></script>
+</body>
+</html>
