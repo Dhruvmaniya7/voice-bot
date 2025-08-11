@@ -21,7 +21,6 @@ day-##/
 ├── templates/       # Jinja2 HTML pages for the UI
 ├── static/          # CSS and JavaScript assets
 ├── requirements.txt # Python package requirements
-└── README.md        # A guide for the specific day's project
 ```
 
 -----
