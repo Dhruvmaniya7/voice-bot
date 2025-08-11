@@ -1,6 +1,3 @@
-Of course\! Here is another version based on your excellent template, with a slightly different structure and feel.
-
------
 
 ### 🎙️ 30 Days of Voice Agents Challenge
 
