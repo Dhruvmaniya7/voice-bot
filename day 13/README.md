@@ -163,5 +163,3 @@ It's a complete voice-in, voice-out experience, powered by a Python backend and 
 The application transcribes your voice, sends the query to Gemini for a smart response, converts that response back into speech, and plays it for you—all in a matter of seconds. It also maintains session history for contextual conversations.
 
 I've documented the entire setup, architecture, and installation process in the project's README. Check out the repository to see how it all works or even run it yourself\!
-
-GitHub Repo: [Link to your GitHub repository]
