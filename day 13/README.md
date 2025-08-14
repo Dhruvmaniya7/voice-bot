@@ -1,5 +1,5 @@
 
-# Dhwani Voice: A Conversational Voice AI 🗣️✨
+# Dhwani Bot: A Conversational Voice AI 🗣️✨
 
 Dhwani Voice is a modern, web-based conversational AI that allows you to interact with a powerful language model using only your voice. Ask a question, and get a spoken response back in a voice of your choice. It's designed to be a seamless voice-in, voice-out experience.
 
@@ -148,5 +148,6 @@ It's a complete voice-in, voice-out experience, powered by a Python backend and 
 🔹 **Speech-to-Text:** AssemblyAI
 🔹 **LLM:** Google's Gemini 1.5 Flash
 🔹 **Text-to-Speech:** Murf.ai
+
 
 
