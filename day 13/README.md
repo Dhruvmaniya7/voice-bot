@@ -57,8 +57,8 @@ Follow these steps to get Dhwani Voice running on your local machine.
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/dhwani-voice.git
-cd dhwani-voice
+https://github.com/Dhruvmaniya7/voice-bot/
+cd "day 13"
 ```
 
 ### 2\. Create and Activate a Virtual Environment
@@ -140,17 +140,6 @@ The FastAPI backend exposes the following endpoints:
 | `DELETE` | `/agent/chat/{session_id}` | Clears the chat history for a given session.                    |
 
 -----
-
-### LinkedIn Post Suggestion
-
-Here's a draft you can adapt for your LinkedIn post.
-
------
-
-**Subject:** I built a full-stack conversational voice AI\! 🗣️
-
-Excited to share my latest project, **Dhwani Voice**—a web application that lets you talk to an AI and get spoken responses back.
-
 It's a complete voice-in, voice-out experience, powered by a Python backend and a sleek, modern frontend. The goal was to explore the end-to-end architecture of a modern voice assistant.
 
 **Tech Stack & Architecture:**
@@ -160,6 +149,4 @@ It's a complete voice-in, voice-out experience, powered by a Python backend and 
 🔹 **LLM:** Google's Gemini 1.5 Flash
 🔹 **Text-to-Speech:** Murf.ai
 
-The application transcribes your voice, sends the query to Gemini for a smart response, converts that response back into speech, and plays it for you—all in a matter of seconds. It also maintains session history for contextual conversations.
 
-I've documented the entire setup, architecture, and installation process in the project's README. Check out the repository to see how it all works or even run it yourself\!
