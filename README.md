@@ -47,12 +47,19 @@ Dhwani Bot follows a microservice-oriented architecture where the frontend clien
 The project follows a modular, service-oriented architecture to keep the code clean and maintainable.
 
 ├── main.py                 # FastAPI application entrypoint
+
 ├── services/               # Handles logic for external APIs (STT, LLM, TTS)
+
 ├── schemas/                # Pydantic models for data validation
+
 ├── static/                 # Frontend CSS and JavaScript
+
 ├── templates/              # HTML templates
+
 ├── .env                    # Environment variables for API keys
+
 ├── requirements.txt        # Python dependencies
+
 └── README.md
 
 -----
