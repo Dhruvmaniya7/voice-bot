@@ -1,7 +1,7 @@
 
-# Dhwani Voice: A Conversational Voice AI 🗣️✨
+# Dhwani Bot: A Conversational Voice AI 🗣️✨
 
-Dhwani Voice is a modern, web-based conversational AI that allows you to interact with a powerful language model using only your voice. Ask a question, and get a spoken response back in a voice of your choice. It's designed to be a seamless voice-in, voice-out experience.
+Dhwani Bot is a modern, web-based conversational AI that allows you to interact with a powerful language model using only your voice. Ask a question, and get a spoken response back in a voice of your choice. It's designed to be a seamless voice-in, voice-out experience.
 
 This project integrates state-of-the-art APIs for Speech-to-Text, Large Language Models, and Text-to-Speech into a sleek, responsive interface powered by a FastAPI backend.
 
@@ -20,7 +20,7 @@ This project integrates state-of-the-art APIs for Speech-to-Text, Large Language
 
 ## 🏗️ Architecture & Tech Stack
 
-Dhwani Voice follows a microservice-oriented architecture where the frontend client communicates with a central FastAPI backend, which in turn orchestrates calls to various external AI services.
+Dhwani Bot follows a microservice-oriented architecture where the frontend client communicates with a central FastAPI backend, which in turn orchestrates calls to various external AI services.
 
 **The data flow is as follows:**
 
@@ -39,6 +39,28 @@ Dhwani Voice follows a microservice-oriented architecture where the frontend cli
   * **Large Language Model (LLM):** [Google Gemini](https://ai.google.dev/)
   * **Text-to-Speech (TTS):** [Murf.ai](https://murf.ai/)
   * **Server:** Uvicorn
+    
+-----
+
+## ## Project Structure
+
+The project follows a modular, service-oriented architecture to keep the code clean and maintainable.
+
+├── main.py                 # FastAPI application entrypoint
+
+├── services/               # Handles logic for external APIs (STT, LLM, TTS)
+
+├── schemas/                # Pydantic models for data validation
+
+├── static/                 # Frontend CSS and JavaScript
+
+├── templates/              # HTML templates
+
+├── .env                    # Environment variables for API keys
+
+├── requirements.txt        # Python dependencies
+
+└── README.md
 
 -----
 
@@ -57,8 +79,8 @@ Follow these steps to get Dhwani Voice running on your local machine.
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/dhwani-voice.git
-cd dhwani-voice
+https://github.com/Dhruvmaniya7/voice-bot/
+cd "day 14"
 ```
 
 ### 2\. Create and Activate a Virtual Environment
@@ -125,43 +147,22 @@ MURF_API_KEY="your_murf_api_key_here"
 
 You should now see the Dhwani Voice interface, ready for you to interact with\!
 
------
-
-## 🔗 API Endpoints
-
-The FastAPI backend exposes the following endpoints:
-
-| Method   | Path                       | Description                                                     |
-| :------- | :------------------------- | :-------------------------------------------------------------- |
-| `GET`    | `/`                        | Serves the main `index.html` page.                              |
-| `GET`    | `/voices`                  | Fetches the list of available TTS voices from the Murf.ai API.  |
-| `POST`   | `/agent/chat/{session_id}` | The main endpoint for handling a conversational turn.           |
-| `GET`    | `/agent/chat/{session_id}` | Retrieves the chat history for a given session.                 |
-| `DELETE` | `/agent/chat/{session_id}` | Clears the chat history for a given session.                    |
 
 -----
-
-### LinkedIn Post Suggestion
-
-Here's a draft you can adapt for your LinkedIn post.
-
------
-
-**Subject:** I built a full-stack conversational voice AI\! 🗣️
-
-Excited to share my latest project, **Dhwani Voice**—a web application that lets you talk to an AI and get spoken responses back.
-
 It's a complete voice-in, voice-out experience, powered by a Python backend and a sleek, modern frontend. The goal was to explore the end-to-end architecture of a modern voice assistant.
 
 **Tech Stack & Architecture:**
 🔹 **Backend:** FastAPI
+
 🔹 **Frontend:** Vanilla JS & Tailwind CSS
+
 🔹 **Speech-to-Text:** AssemblyAI
+
 🔹 **LLM:** Google's Gemini 1.5 Flash
+
 🔹 **Text-to-Speech:** Murf.ai
 
-The application transcribes your voice, sends the query to Gemini for a smart response, converts that response back into speech, and plays it for you—all in a matter of seconds. It also maintains session history for contextual conversations.
 
-I've documented the entire setup, architecture, and installation process in the project's README. Check out the repository to see how it all works or even run it yourself\!
 
-GitHub Repo: [Link to your GitHub repository]
+
+
