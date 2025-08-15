@@ -146,9 +146,13 @@ It's a complete voice-in, voice-out experience, powered by a Python backend and 
 
 **Tech Stack & Architecture:**
 🔹 **Backend:** FastAPI
+
 🔹 **Frontend:** Vanilla JS & Tailwind CSS
+
 🔹 **Speech-to-Text:** AssemblyAI
+
 🔹 **LLM:** Google's Gemini 1.5 Flash
+
 🔹 **Text-to-Speech:** Murf.ai
 
 
