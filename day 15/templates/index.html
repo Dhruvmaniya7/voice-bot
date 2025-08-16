@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhwani Bot</title> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Solid Black Background */
+            color: #F9FAFB;
+            background: #1f8cb8;
+            background: linear-gradient(57deg, rgba(31, 140, 184, 1) 0%, rgba(44, 95, 153, 1) 24%, rgba(68, 199, 66, 1) 48%, rgba(217, 62, 35, 1) 80%, rgba(194, 50, 50, 1) 100%);
+        }
+
+        .main-container {
+            background-color: rgba(13, 17, 23, 0.7); /* Dark semi-transparent card */
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        #aether-record-btn {
+            background-color: #8B5CF6; /* Purple */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        }
+
+        #aether-record-btn:hover:not(:disabled) {
+            background-color: #7C3AED; /* Darker Purple */
+            transform: scale(1.05);
+        }
+        
+        #aether-record-btn:disabled {
+            background-color: #4B5563; /* Gray for disabled state */
+            cursor: not-allowed;
+        }
+
+        #aether-record-btn.is-recording {
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(139, 92, 246, 1);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+            }
+        }
+
+        #chat-history-container {
+            background-color: #0d1117;
+        }
+
+        #chat-history-container::-webkit-scrollbar { width: 6px; }
+        #chat-history-container::-webkit-scrollbar-track { background: #374151; }
+        #chat-history-container::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="main-container w-full max-w-2xl p-8 flex flex-col">
+        <div class="text-center mb-6">
+            <h1 class="text-4xl font-bold text-white">Dhwani Bot</h1> <p class="text-lg text-gray-400 mt-1">Ask questions using your voice and get responses in speech.</p>
+        </div>
+
+        <div class="mb-6 flex flex-col items-center">
+            <label for="agent-voice-select" class="block text-sm font-medium text-gray-300 mb-2">Select a Voice:</label>
+            <select id="agent-voice-select" class="w-full max-w-xs p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-800 border-gray-600 text-white"></select>
+        </div>
+
+        <div class="flex flex-col items-center justify-center my-6">
+            <button id="aether-record-btn" class="w-24 h-24 rounded-full flex items-center justify-center text-white">
+            </button>
+            <p id="agent-status" class="mt-4 text-center text-gray-300 h-6">Ready</p>
+        </div>
+
+        <div id="agent-error-box" class="hidden flex items-center gap-3 p-3 mb-4 text-sm text-red-300 bg-red-900/60 rounded-lg border border-red-800">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alert-triangle flex-shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+            <span id="agent-error-text">An unexpected error occurred.</span>
+        </div>
+
+        <div id="chat-history-container" class="w-full h-64 overflow-y-auto p-4 rounded-lg space-y-4 border border-gray-700">
+            <p id="empty-chat-message" class="text-center text-gray-500">Your conversation will appear here.</p>
+        </div>
+
+        <div class="mt-6 text-center">
+            <button id="agent-clear-btn" class="py-2 px-5 bg-slate-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-md hover:scale-105 active:scale-95 transform transition-all duration-150 ease-in-out">
+                Clear Chat
+            </button>
+        </div>
+    </div>
+
+    <div id="audio-playback-container" class="hidden"></div>
+    
+    <script src="/static/index.js"></script>
+</body>
+</html>
