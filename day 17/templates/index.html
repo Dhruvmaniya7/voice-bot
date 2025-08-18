@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; }
+        .glass-card { background-color: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glowing-btn { background-image: linear-gradient(45deg, #6366f1, #a855f7); color: white; transition: all 0.3s ease; }
+        .glowing-btn:hover:not(:disabled) { box-shadow: 0 0 15px #a855f7; transform: translateY(-2px); }
+        .glowing-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="glass-card w-full max-w-2xl p-10 rounded-3xl shadow-2xl">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold tracking-tight mb-2">Echo bot V3</h1>
+            <p class="text-lg text-slate-400">Click 'Start' and speak to the AI.</p>
+        </div>
+
+        <div>
+            <div class="flex justify-center space-x-4 mb-6">
+                <button id="start-recording-btn" class="glowing-btn py-3 px-6 font-bold rounded-full text-lg">Start Conversation</button>
+                <button id="stop-recording-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full text-lg transition-colors disabled:opacity-50" disabled>Stop</button>
+            </div>
+            
+            <div id="status-box" class="text-center h-6 mb-4 font-semibold text-purple-400"></div>
+
+            <div class="mt-6">
+                <h3 class="text-lg font-bold text-slate-300 mb-2">Live Transcript</h3>
+                <div id="transcription-result" class="p-4 min-h-[100px] rounded-lg border border-white/[0.1] bg-slate-800/50 text-slate-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/index.js"></script>
+</body>
+</html>
