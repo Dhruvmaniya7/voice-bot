@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-python-dotenv
-requests
-assemblyai
-Jinja2
-python-multipart
