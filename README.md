@@ -1,86 +1,84 @@
+-----
 
-# Dhwani Bot: A Conversational Voice AI 🗣️✨
+# DIVA: A Real-Time Conversational Voice AI 🗣️✨
 
-Dhwani Bot is a modern, web-based conversational AI that allows you to interact with a powerful language model using only your voice. Ask a question, and get a spoken response back in a voice of your choice. It's designed to be a seamless voice-in, voice-out experience.
+DIVA is a modern, web-based conversational AI that enables a truly seamless, real-time voice interaction with a powerful language model. It's designed as a full-duplex system, allowing you to speak at any time—even while the AI is responding—for a natural, fluid conversation.
 
-This project integrates state-of-the-art APIs for Speech-to-Text, Large Language Models, and Text-to-Speech into a sleek, responsive interface powered by a FastAPI backend.
+This project showcases an advanced architecture using WebSockets to stream data end-to-end: from your microphone to the transcription service, to the language model, to the text-to-speech engine, and finally, back to your speakers.
 
 ## ✨ Features
 
-  * **🎤 Voice-to-Text:** Real-time audio transcription powered by **AssemblyAI**.
-  * **🧠 Intelligent Responses:** Leverages **Google's Gemini 1.5 Flash** for coherent, context-aware conversational abilities.
-  * **🔊 Text-to-Speech:** Generates high-quality, natural-sounding audio responses using **Murf.ai**.
-  * **🗣️ Dynamic Voice Selection:** Choose from a variety of voices for the AI's responses.
+  * **🔴 Full Duplex & Barge-In:** The standout feature. You can interrupt the AI at any point, and it will stop speaking and listen, just like a real conversation.
+  * **🎤 Real-Time Voice-to-Text:** Live audio from your microphone is streamed via WebSockets for instant transcription.
+  * **🔊 Streaming Text-to-Speech:** Generates high-quality audio from **Murf.ai** and plays it back *as it's being generated*, resulting in a much faster response time.
+  * **🧠 Intelligent Responses:** Leverages **Google's Gemini** for coherent, context-aware conversational abilities.
   * **📜 Session Management:** Remembers your conversation history within a session for contextual follow-up questions.
+  * **🚀 Robust & Asynchronous Backend:** Built with **FastAPI** and **WebSockets** for high-performance, bidirectional communication.
   * **🌐 Modern Web UI:** A clean, user-friendly interface built with HTML, Tailwind CSS, and Vanilla JavaScript.
-  * **🚀 Robust Backend:** Built with **FastAPI** for high performance and asynchronous request handling.
   * **🧼 Clear History:** Easily start a new conversation by clearing the session history.
 
 -----
 
 ## 🏗️ Architecture & Tech Stack
 
-Dhwani Bot follows a microservice-oriented architecture where the frontend client communicates with a central FastAPI backend, which in turn orchestrates calls to various external AI services.
+DIVA uses a streaming-first architecture built around WebSockets. This allows for low-latency, real-time communication between the client and the server, which is essential for features like barge-in.
 
-**The data flow is as follows:**
+**The real-time data flow is as follows:**
 
-1.  **Audio Capture (Frontend):** The user records their voice query in the browser.
-2.  **STT (Speech-to-Text):** The audio is sent to the FastAPI backend, which forwards it to **AssemblyAI** for transcription.
-3.  **LLM (Language Model):** The transcribed text is sent to the **Google Gemini API**, along with the session's chat history, to generate a relevant response.
-4.  **TTS (Text-to-Speech):** The text response from Gemini is sent to the **Murf.ai API** to be converted into an audio file (MP3).
-5.  **Response to Client:** The backend returns the URL of the generated audio and the updated chat history to the frontend.
-6.  **Playback & Display (Frontend):** The browser plays the audio response and dynamically updates the chat history on the screen.
+1.  **WebSocket Connection:** The frontend establishes a persistent WebSocket connection with the FastAPI backend.
+2.  **Audio Streaming (Client → Server):** The user speaks, and the browser captures the audio and streams it in chunks to the backend over the WebSocket.
+3.  **Real-Time STT (Speech-to-Text):** The backend immediately forwards the incoming audio stream to a real-time transcription service.
+4.  **LLM Processing:** The transcribed text is sent to the **Google Gemini API** along with the chat history. The LLM generates a response, which can also be streamed back word-by-word.
+5.  **Streaming TTS (Text-to-Speech):** The text response from Gemini is streamed to the **Murf.ai API** to be converted into audio chunks.
+6.  **Audio Streaming (Server → Client):** The backend receives the audio chunks from Murf.ai and sends them back to the frontend over the WebSocket *without waiting for the full audio to be generated*.
+7.  **Live Playback & Interruption:** The browser plays the audio chunks as they arrive. The frontend is always listening, so if the user speaks, it sends an interrupt signal to the backend to stop the current playback and process the new input.
 
 ### Technology Stack
 
   * **Backend:** Python, FastAPI
+  * **Real-Time Communication:** WebSockets
   * **Frontend:** HTML5, Tailwind CSS, Vanilla JavaScript
-  * **Speech-to-Text (STT):** [AssemblyAI](https://www.assemblyai.com/)
+  * **Speech-to-Text (STT):** A real-time transcription service (e.g., AssemblyAI, Deepgram)
   * **Large Language Model (LLM):** [Google Gemini](https://ai.google.dev/)
-  * **Text-to-Speech (TTS):** [Murf.ai](https://murf.ai/)
+  * **Text-to-Speech (TTS):** [Murf.ai](https://murf.ai/) (Streaming API)
   * **Server:** Uvicorn
-    
+
 -----
 
-## ## Project Structure
+## \#\# Project Structure
 
-The project follows a modular, service-oriented architecture to keep the code clean and maintainable.
+The project follows a modular structure to keep the code clean and maintainable.
 
-├── main.py                 # FastAPI application entrypoint
-
-├── services/               # Handles logic for external APIs (STT, LLM, TTS)
-
-├── schemas/                # Pydantic models for data validation
-
-├── static/                 # Frontend CSS and JavaScript
-
-├── templates/              # HTML templates
-
-├── .env                    # Environment variables for API keys
-
-├── requirements.txt        # Python dependencies
-
+```
+├── main.py               # FastAPI application and WebSocket endpoint
+├── services/             # Handles logic for external APIs (STT, LLM, TTS)
+├── schemas/              # Pydantic models for data validation
+├── static/               # Frontend CSS and JavaScript
+├── templates/            # HTML templates
+├── .env                  # Environment variables for API keys
+├── requirements.txt      # Python dependencies
 └── README.md
+```
 
 -----
 
 ## 🛠️ Setup & Installation
 
-Follow these steps to get Dhwani Voice running on your local machine.
+Follow these steps to get DIVA running on your local machine.
 
 ### Prerequisites
 
   * Python 3.8+
   * API Keys from:
-      * [AssemblyAI](https://www.assemblyai.com/dashboard/signup)
+      * A real-time transcription service (e.g., AssemblyAI)
       * [Google AI Studio (for Gemini)](https://aistudio.google.com/app/apikey)
-      * [Murf.ai](https://www.google.com/search?q=https://murf.ai/user/register)
+      * [Murf.ai](https://murf.ai/)
 
 ### 1\. Clone the Repository
 
 ```bash
-https://github.com/Dhruvmaniya7/voice-bot/
-cd "day 14"
+git clone https://github.com/Dhruvmaniya7/voice-bot/
+cd voice-bot
 ```
 
 ### 2\. Create and Activate a Virtual Environment
@@ -103,9 +101,11 @@ Create a `requirements.txt` file in the root directory with the following conten
 ```text
 fastapi
 uvicorn[standard]
+websockets
 python-dotenv
 requests
-assemblyai
+# Add your specific STT and LLM SDKs
+assemblyai 
 google-generativeai
 jinja2
 python-multipart
@@ -124,7 +124,7 @@ Create a file named `.env` in the root of your project directory and add your AP
 ```env
 # .env file
 
-ASSEMBLYAI_API_KEY="your_assemblyai_api_key_here"
+TRANSCRIPTION_API_KEY="your_stt_api_key_here"
 GEMINI_API_KEY="your_google_gemini_api_key_here"
 MURF_API_KEY="your_murf_api_key_here"
 ```
@@ -145,24 +145,4 @@ MURF_API_KEY="your_murf_api_key_here"
 
     **`http://127.0.0.1:8000`**
 
-You should now see the Dhwani Voice interface, ready for you to interact with\!
-
-
------
-It's a complete voice-in, voice-out experience, powered by a Python backend and a sleek, modern frontend. The goal was to explore the end-to-end architecture of a modern voice assistant.
-
-**Tech Stack & Architecture:**
-🔹 **Backend:** FastAPI
-
-🔹 **Frontend:** Vanilla JS & Tailwind CSS
-
-🔹 **Speech-to-Text:** AssemblyAI
-
-🔹 **LLM:** Google's Gemini 1.5 Flash
-
-🔹 **Text-to-Speech:** Murf.ai
-
-
-
-
-
+You should now see the DIVA interface, ready for a real-time conversation\!
