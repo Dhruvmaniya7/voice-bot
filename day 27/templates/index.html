@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diva - Your Cosmic Voice Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000000; color: #F9FAFB; background: linear-gradient(57deg, rgba(31, 140, 184, 1) 0%, rgba(44, 95, 153, 1) 24%, rgba(68, 199, 66, 1) 48%, rgba(217, 62, 35, 1) 80%, rgba(194, 50, 50, 1) 100%); overflow: hidden; }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); } }
+        .recording { animation: pulse 1.5s infinite; }
+        .chat-message { padding: 2px 0; margin-bottom: 8px; max-width: 100%; word-wrap: break-word; font-size: 1.125rem; }
+        .user-prefix { font-weight: 700; color: #93c5fd; margin-right: 8px; }
+        .ai-prefix { font-weight: 700; color: #c4b5fd; margin-right: 8px; }
+        .message-content { color: #d1d5db; }
+        #chatContainer::-webkit-scrollbar { width: 8px; }
+        #chatContainer::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 10px; }
+        #chatContainer::-webkit-scrollbar-thumb { background-color: #6d28d9; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; transition: background-color 0.3s; }
+        #chatContainer::-webkit-scrollbar-thumb:hover { background-color: #8b5cf6; }
+        #chatContainer { scrollbar-width: thin; scrollbar-color: #6d28d9 rgba(0, 0,0, 0.2); }
+        .notification-popup { position: fixed; top: 20px; right: 20px; background-color: #073861; color: white; padding: 1rem 1.5rem; border-radius: 0.75rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); font-size: 1.125rem; font-weight: 500; opacity: 0; transform: translateX(100%); transition: all 0.5s ease-in-out; z-index: 1000; }
+        .notification-popup.show { opacity: 1; transform: translateX(0); }
+        #settingsBtn { position: fixed; top: 20px; left: 20px; z-index: 1001; }
+        #apiConfigSidebar { position: fixed; top: 0; left: -400px; width: 380px; height: 100%; background-color: #111827; box-shadow: 10px 0 20px rgba(0,0,0,0.3); transition: left 0.4s ease-in-out; z-index: 1002; padding: 1.5rem; display: flex; flex-direction: column; }
+        #apiConfigSidebar.show { left: 0; }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(2px); z-index: 1000; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+        #overlay.show { opacity: 1; pointer-events: auto; }
+        .sidebar-input { background-color: #374151; border: 1px solid #4b5563; color: #f3f4f6; }
+        #notificationContainer { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 2000; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .notification-toast { padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; font-weight: 500; box-shadow: 0 4px 6px rgba(0,0,0,0.1); opacity: 0; transform: translateY(-20px); transition: all 0.3s ease-in-out; }
+        .notification-toast.show { opacity: 1; transform: translateY(0); }
+        .notification-toast.error { background-color: #ef4444; }
+        .notification-toast.success { background-color: #22c55e; }
+    </style>
+</head>
+<body class="text-gray-200 font-sans">
+    <div id="overlay"></div>
+    <div id="notificationContainer"></div>
+    <button id="settingsBtn" class="p-2 rounded-full bg-gray-800/50 text-white hover:bg-gray-700/70 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311a1.464 1.464 0 0 1-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c-1.4-.413-1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/></svg>
+    </button>
+    <div id="apiConfigSidebar">
+        <h2 class="text-2xl font-bold text-white mb-6">API Configuration</h2>
+        <div class="space-y-4 flex-grow overflow-y-auto pr-2">
+            <div>
+                <label for="geminiKey" class="block mb-2 text-sm font-medium text-gray-300">Gemini API Key (Essential)</label>
+                <input type="password" id="geminiKey" class="sidebar-input text-sm rounded-lg block w-full p-2.5" placeholder="Leave blank to use server key">
+            </div>
+            <div>
+                <label for="assemblyaiKey" class="block mb-2 text-sm font-medium text-gray-300">AssemblyAI API Key (Essential)</label>
+                <input type="password" id="assemblyaiKey" class="sidebar-input text-sm rounded-lg block w-full p-2.5" placeholder="Leave blank to use server key">
+            </div>
+            <div>
+                <label for="murfaiKey" class="block mb-2 text-sm font-medium text-gray-300">Murf.ai API Key (Essential)</label>
+                <input type="password" id="murfaiKey" class="sidebar-input text-sm rounded-lg block w-full p-2.5" placeholder="Leave blank to use server key">
+            </div>
+            <div>
+                <label for="weatherapiKey" class="block mb-2 text-sm font-medium text-gray-300">Weather API Key (Optional)</label>
+                <input type="password" id="weatherapiKey" class="sidebar-input text-sm rounded-lg block w-full p-2.5" placeholder="Leave blank to use server key">
+            </div>
+            <div>
+                <label for="tavilyaiKey" class="block mb-2 text-sm font-medium text-gray-300">Tavily AI Key (Optional)</label>
+                <input type="password" id="tavilyaiKey" class="sidebar-input text-sm rounded-lg block w-full p-2.5" placeholder="Leave blank to use server key">
+            </div>
+        </div>
+        <div class="mt-6">
+            <button id="saveConfigBtn" class="w-full text-white bg-violet-600 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-violet-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                Save Configuration
+            </button>
+        </div>
+    </div>
+    <div class="container mx-auto flex flex-col justify-center items-center min-h-screen p-4">
+        <div class="w-full max-w-2xl bg-gray-800 backdrop-blur-md rounded-2xl shadow-2xl p-6 sm:p-8 text-center space-y-6 border border-teal-500/20">
+            <div class="space-y-2">
+                <h1 class="text-3xl font-bold text-white">Chat with Diva 🚀✨</h1>
+                <p class="text-gray-300">Your adventurous companion, ready to explore a world of knowledge. What's our next quest?</p>
+            </div>
+            <div class="flex justify-center py-4">
+                <button id="recordBtn" class="w-24 h-24 rounded-full bg-violet-600 text-white flex items-center justify-center transition-all duration-300 ease-in-out hover:bg-violet-700 focus:outline-none focus:ring-4 focus:ring-violet-500/50"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16"><path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/><path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/></svg></button>
+            </div>
+            <div id="statusDisplay" class="text-lg text-gray-300 h-8 transition-all duration-300">Ready to explore!</div>
+            <div id="chatDisplay" class="bg-black/40 rounded-lg p-4 min-h-[15rem] hidden text-left"><div id="chatContainer" class="h-full max-h-64 overflow-y-auto text-gray-300"></div></div>
+            <div id="clearBtnContainer" class="pt-4 hidden"><button id="clearBtn" class="py-2 px-5 border border-violet-500/50 text-violet-300 rounded-lg hover:bg-violet-500/20 hover:text-white transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-violet-500/70 active:scale-95">Clear Chat</button></div>
+        </div>
+    </div>
+    <script src="/static/index.js"></script>
+</body>
+</html>

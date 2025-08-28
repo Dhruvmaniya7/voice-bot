@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-dotenv
+requests
+assemblyai
+Jinja2
+python-multipart
+google-generativeai
+websockets
+googletrans==4.0.0-rc1
+tavily-python
+requests
+pytz
