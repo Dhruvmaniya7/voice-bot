@@ -58,18 +58,26 @@ Here is the raw Markdown code you can copy and paste directly into your `README.
 
 -----
 
+
 ### 🪄 Tech Stack
 
-| Component                | Technology & Spells                                                                                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Backend** | \<img src="[https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white](https://www.google.com/search?q=https://img.shields.io/badge/Python-3776AB%3Fstyle%3Dfor-the-badge%26logo%3Dpython%26logoColor%3Dwhite)" /\> \<img src="[https://img.shields.io/badge/FastAPI-009688?style=for-the-badge\&logo=fastapi\&logoColor=white](https://www.google.com/search?q=https://img.shields.io/badge/FastAPI-009688%3Fstyle%3Dfor-the-badge%26logo%3Dfastapi%26logoColor%3Dwhite)" /\> |
-| **Frontend** | \<img src="[https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge\&logo=html5\&logoColor=white](https://www.google.com/search?q=https://img.shields.io/badge/HTML5-E34F26%3Fstyle%3Dfor-the-badge%26logo%3Dhtml5%26logoColor%3Dwhite)" /\> \<img src="[https://img.shields.io/badge/Tailwind\_CSS-38B2AC?style=for-the-badge\&logo=tailwind-css\&logoColor=white](https://www.google.com/search?q=https://img.shields.io/badge/Tailwind_CSS-38B2AC%3Fstyle%3Dfor-the-badge%26logo%3Dtailwind-css%26logoColor%3Dwhite)" /\> \<img src="[https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge\&logo=javascript\&logoColor=black](https://www.google.com/search?q=https://img.shields.io/badge/JavaScript-F7DF1E%3Fstyle%3Dfor-the-badge%26logo%3Djavascript%26logoColor%3Dblack)" /\> |
-| **Real-Time Communication** | \<img src="[https://img.shields.io/badge/WebSockets-010101?style=for-the-badge](https://www.google.com/search?q=https://img.shields.io/badge/WebSockets-010101%3Fstyle%3Dfor-the-badge)" /\>                                                                                                                               |
-| **Speech-to-Text (STT)** | \<img src="[https://img.shields.io/badge/AssemblyAI-FFB302?style=for-the-badge](https://www.google.com/search?q=https://img.shields.io/badge/AssemblyAI-FFB302%3Fstyle%3Dfor-the-badge)" /\>                                                                                                                                |
-| **Language Model (LLM)** | \<img src="[https://img.shields.io/badge/Google\_Gemini-8E75B9?style=for-the-badge](https://www.google.com/search?q=https://img.shields.io/badge/Google_Gemini-8E75B9%3Fstyle%3Dfor-the-badge)" /\>                                                                                                                            |
-| **Text-to-Speech (TTS)** | \<img src="[https://img.shields.io/badge/Murf.ai-5D5FEF?style=for-the-badge](https://www.google.com/search?q=https://img.shields.io/badge/Murf.ai-5D5FEF%3Fstyle%3Dfor-the-badge)" /\>                                                                                                                                   |
-| **Tools & APIs (Spells)** | \<img src="[https://img.shields.io/badge/Tavily\_AI-000000?style=for-the-badge](https://www.google.com/search?q=https://img.shields.io/badge/Tavily_AI-000000%3Fstyle%3Dfor-the-badge)" /\> \<img src="[https://img.shields.io/badge/WeatherAPI-37A5E6?style=for-the-badge](https://www.google.com/search?q=https://img.shields.io/badge/WeatherAPI-37A5E6%3Fstyle%3Dfor-the-badge)" /\>                                                    
+#### **Backend**
+* Python
+* FastAPI
+* Uvicorn
+* WebSockets
 
+#### **Frontend**
+* HTML5
+* Tailwind CSS
+* Vanilla JavaScript
+
+#### **AI & External Services**
+* **Google Gemini:** Large Language Model (LLM)
+* **AssemblyAI:** Speech-to-Text (STT)
+* **Murf.ai:** Text-to-Speech (TTS)
+* **Tavily AI:** Web Search Tool
+* **WeatherAPI:** Live Weather Data
 
 ## 📁 Project Structure
 
