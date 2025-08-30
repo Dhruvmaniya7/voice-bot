@@ -6,14 +6,11 @@ Welcome, adventurer\! Meet **DIVA** (Dhruv's Intelligent Voice Assistant), your 
 
 This project is built on a cutting-edge, streaming-first architecture, allowing for a truly seamless and natural voice-in, voice-out experience. You can even interrupt DIVA while she’s speaking, and she will gracefully stop to listen.
 
-\<br/\>
-\<p align="center"\>
-\<em\>(Here is the perfect spot to add a GIF of your awesome UI in action\!)\</em\>
-\</p\>
-\<p align="center"\>
-\<img src="[https://i.imgur.com/your-demo-gif-url.gif](https://www.google.com/search?q=https://i.imgur.com/your-demo-gif-url.gif)" alt="DIVA UI Demo"\>
-\</p\>
-\<br/\>
+<img width="1359" height="731" alt="Screenshot 2025-08-29 210526" src="https://github.com/user-attachments/assets/3d75a8fb-1bcf-4ce1-a2a6-3d8ce3d4363e" />
+
+<img width="1361" height="730" alt="Screenshot 2025-08-28 192643" src="https://github.com/user-attachments/assets/9bb4d251-c653-4f99-9b3d-fd3221d6a334" />
+
+<img width="1161" height="767" alt="Screenshot 2025-08-28 192245" src="https://github.com/user-attachments/assets/05a0690a-9a21-4d4f-8d94-dbfa0522a1dc" />
 
 ## ✨ Features You'll Love
 
@@ -71,9 +68,7 @@ flowchart TD
 
 Here’s a look at the project's file structure, keeping everything neat and organized.
 
-\<p align="center"\>
-\<img src="[https://i.imgur.com/8d5f75.png](https://www.google.com/search?q=https://i.imgur.com/8d5f75.png)" alt="Project File Structure" width="300"\>
-\</p\>
+<img width="178" height="401" alt="image" src="https://github.com/user-attachments/assets/95cfdd67-101a-4a31-b3c8-174d6247edbe" />
 
 ## 🛠️ Setup & Installation
 
@@ -146,7 +141,3 @@ TAVILY_API_KEY="your_tavily_api_key_here"
     **`http://127.0.0.1:8000`**
 
 You should now see the DIVA interface, ready for a real-time conversation\!
-
-### Deployment Note
-
-If you deploy this application on a free-tier service (like Render, Heroku, etc.), please be aware that the app may "sleep" after a period of inactivity. The first request after it has slept might be slow as the server "wakes up." This is normal for free-tier deployments.
