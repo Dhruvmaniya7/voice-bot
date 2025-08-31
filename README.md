@@ -52,10 +52,6 @@ flowchart TD
 6.  **Audio Streaming (Server → Client):** The backend receives audio chunks from Murf.ai and sends them back to the frontend over the WebSocket *without waiting for the full audio to be generated*.
 7.  **Live Playback & Interruption:** The browser plays the audio chunks as they arrive. If the user speaks again, the frontend stops playback and begins sending new audio, restarting the loop.
 
-Of course\! Apologies for the confusion. Markdown code itself is text, but when viewed on a platform like GitHub, it renders those colorful badges that look like images.
-
-Here is the raw Markdown code you can copy and paste directly into your `README.md` file. It will create the colorful, visually appealing tech stack table you're looking for, just like in the examples.
-
 -----
 
 
