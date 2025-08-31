@@ -152,3 +152,7 @@ TAVILY_API_KEY="your_tavily_api_key_here"
     **`http://127.0.0.1:8000`**
 
 You should now see the DIVA interface, ready for a real-time conversation\!
+
+##or
+
+website:-https://diva-the-mage.onrender.com/
